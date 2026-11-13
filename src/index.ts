@@ -42,7 +42,7 @@ import {
 
 const PORT = parseInt(process.env.PORT || "3005", 10);
 const NATS_URL = process.env.NATS_URL;
-const BOT_PHONE = process.env.BOT_PHONE || "573021004070";
+const BOT_PHONE = process.env.BOT_PHONE || "";
 
 const jsonCodec = JSONCodec();
 
