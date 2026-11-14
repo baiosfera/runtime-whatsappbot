@@ -1,3 +1,5 @@
+import { cleanEnv } from "./env.js";
+
 export interface CompletionMessage {
   role: "system" | "user" | "assistant";
   content: string;
@@ -9,8 +11,8 @@ export interface BifrostOptions {
   maxTokens?: number;
 }
 
-const BIFROST_URL = process.env.BIFROST_URL || "http://bifrost:8080/v1";
-const BIFROST_VIRTUAL_KEY = process.env.BIFROST_VIRTUAL_KEY || "vk-production-main";
+const BIFROST_URL = cleanEnv(process.env.BIFROST_URL, "http://bifrost:8080/v1");
+const BIFROST_VIRTUAL_KEY = cleanEnv(process.env.BIFROST_VIRTUAL_KEY, "vk-production-main");
 
 export async function checkBifrostConnection(): Promise<boolean> {
   try {

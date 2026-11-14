@@ -1,5 +1,7 @@
-const EVOLUTION_URL = process.env.EVOLUTION_URL || "http://evolution:8085";
-const EVOLUTION_API_KEY = process.env.EVOLUTION_API_KEY || "481c8c43-0023-4028-bad5-9d1355a3674c";
+import { cleanEnv } from "./env.js";
+
+const EVOLUTION_URL = cleanEnv(process.env.EVOLUTION_URL, "http://evolution:8085");
+const EVOLUTION_API_KEY = cleanEnv(process.env.EVOLUTION_API_KEY) || cleanEnv(process.env.GLOBAL_API_KEY);
 
 export async function checkEvolutionConnection(): Promise<boolean> {
   try {
@@ -77,9 +79,9 @@ export async function downloadMediaFromEvolution(messageObj: any): Promise<strin
 
 export async function transcribeAudioGroq(audioBase64: string): Promise<string | null> {
   const keys = [
-    process.env.GROQ_API_KEY,
-    process.env.WHISPER_GROQ_API_KEY,
-  ].filter(Boolean) as string[];
+    cleanEnv(process.env.GROQ_API_KEY),
+    cleanEnv(process.env.WHISPER_GROQ_API_KEY),
+  ].filter(Boolean);
 
   if (keys.length === 0) {
     console.warn("[Groq Whisper] GROQ_API_KEY / WHISPER_GROQ_API_KEY not configured");

@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import type { CustomerData, EventsContext } from "./db.js";
+import { cleanEnv } from "./env.js";
 
 export interface BrandConfig {
   projectName: string;
@@ -40,8 +41,8 @@ export function getBogotaTimeInfo() {
 }
 
 export function resolveBrandSSoT(): BrandConfig {
-  const projectName = process.env.PROJECT_NAME || process.env.APP_IDENTITY || "BRAND";
-  const customPath = process.env.BRAND_SSOT_PATH;
+  const projectName = cleanEnv(process.env.PROJECT_NAME) || cleanEnv(process.env.APP_IDENTITY) || "BRAND";
+  const customPath = cleanEnv(process.env.BRAND_SSOT_PATH);
 
   const candidateDirs = [
     customPath,
@@ -89,18 +90,18 @@ export function resolveBrandSSoT(): BrandConfig {
   const brandName =
     loadedJson?.brand_architecture?.umbrella_brand?.name ||
     loadedJson?.brand?.name ||
-    process.env.BRAND_NAME ||
+    cleanEnv(process.env.BRAND_NAME) ||
     projectName;
 
   const archetype =
     loadedJson?.brand_architecture?.leadership_and_ambassador?.brand_archetype ||
     loadedJson?.brand?.archetype ||
-    process.env.BRAND_ARCHETYPE ||
+    cleanEnv(process.env.BRAND_ARCHETYPE) ||
     "Anfitrión Oficial y Concierge de Marca";
 
   const appBaseUrl =
-    process.env.APP_URL ||
-    process.env.CANONICAL_URL ||
+    cleanEnv(process.env.APP_URL) ||
+    cleanEnv(process.env.CANONICAL_URL) ||
     "http://localhost:3000";
 
   const canonicalUrls: Record<string, string> = {
