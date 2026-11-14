@@ -22,6 +22,8 @@ zerops:
         DATABASE_URL: ${database_connectionString}
         BIFROST_URL: "http://bifrost:8080/v1"
         EVOLUTION_URL: "http://evolution:8085"
+        EVOLUTION_API_KEY: ${EVOLUTION_API_KEY}
+        EVOLUTION_INSTANCE: ${PROJECT_NAME}
       start: bun run src/index.ts
       healthCheck:
         httpGet:
