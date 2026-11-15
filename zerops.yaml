@@ -17,7 +17,7 @@ zerops:
           httpSupport: true
       envVariables:
         PORT: "3005"
-        NATS_URL: ${nats_connectionString}
+        # Optional: inject NATS_URL via Project Shared Vault / Service Env when nats:single@2.12 is provisioned
         VALKEY_URL: ${valkey_connectionString}
         DATABASE_URL: ${database_connectionString}
         BIFROST_URL: "http://bifrost:8080/v1"
