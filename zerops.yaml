@@ -23,10 +23,6 @@ zerops:
         BIFROST_URL: "http://bifrost:8080/v1"
         EVOLUTION_URL: "http://evolution:8085"
         EVOLUTION_INSTANCE: ${PROJECT_NAME}
-        MINIO_ENDPOINT: ${objectstorage_apiHost}
-        MINIO_BUCKET: ${objectstorage_bucketName}
-        MINIO_ACCESS_KEY: ${objectstorage_accessKeyId}
-        MINIO_SECRET_KEY: ${objectstorage_secretAccessKey}
       start: bun run src/index.ts
       healthCheck:
         httpGet:
